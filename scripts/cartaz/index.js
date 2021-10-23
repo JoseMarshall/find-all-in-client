@@ -1,7 +1,7 @@
 import { instance, getCSRF, isLogged, splitAdress } from '../utils.js';
 
 const form = document.querySelector('#feedback_form');
-async function createCartaz(e) {
+async function createPosters(e) {
   e.preventDefault();
   const status = e.target[4].value;
   const data = {
@@ -15,7 +15,6 @@ async function createCartaz(e) {
   };
   console.log(data);
   try {
-    await getCSRF();
     await instance
       .post('/api/v1/missing-posters', data)
       .then(res => console.log(res.data))
@@ -49,4 +48,4 @@ async function upload(file, name) {
   }
 }
 
-form.addEventListener('submit', createCartaz);
+form.addEventListener('submit', createPosters);

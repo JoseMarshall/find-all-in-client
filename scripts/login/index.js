@@ -1,19 +1,25 @@
-import submitForm from "./submitForm.js";
-import {getCSRF, isLogged} from "../utils.js";
+import submitForm from './submitForm.js';
+import { getCSRF, isLogged } from '../utils.js';
 
-const form = document.querySelector(".login-form");
+const form = document.querySelector('.login-form');
 
-form.addEventListener("submit",submitForm);
+form.addEventListener('submit', submitForm);
 
-async function main(){
+async function main() {
   try {
-    const token = await getCSRF();
-    if(!token) throw new Error("Not Token");
+    /*     const token = await getCSRF();
+    if (!token) throw new Error('Not Token'); */
 
     const isAuth = (await isLogged()).payload.error.details.isAuthenticated;
-    if(!isAuth) throw new Error("Not authenticated");
-    
+    if (!isAuth) throw new Error('Not authenticated');
   } catch (error) {
-   console.error(error); 
+    console.error(error);
   }
 }
+
+async function onLoad(e) {
+  e.preventDefault();
+  console.log('Loaded', { e });
+}
+
+document.addEventListener('DOMContentLoaded', onLoad);

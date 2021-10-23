@@ -1,5 +1,7 @@
 //ts-check
-export const instance = axios.create({ baseURL: 'https://find-all-in.herokuapp.com' });
+export const instance = axios.create({
+  baseURL: 'https://find-all-in.herokuapp.com',
+});
 
 export async function getCSRF() {
   return await instance
