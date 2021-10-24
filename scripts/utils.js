@@ -1,6 +1,12 @@
 //ts-check
 export const instance = axios.create({
   baseURL: 'https://find-all-in.herokuapp.com',
+  withCredentials: true,
+  headers: {
+    common: {
+      Authorization: getCookies()
+    }
+  }
 });
 
 export async function getCSRF() {
@@ -23,10 +29,12 @@ export function isEmpty(entry) {
   }
 }
 
-export function splitAdress(fullAdress) {
-  const addressObject = {};
-  const keys = ['country', 'province', 'street', 'number'];
-  const values = fullAdress.split(',');
-  for (let i in values) addressObject[keys[i]] = values[i];
-  return addressObject;
+export function splitAddress(fullAddress) {
+  const keys = ['province', 'county', 'street', 'number'];
+  return fullAddress.split(',').reduce((acc, value, index) => { acc[keys[index]] = value.trim(); return acc }, {});
+}
+
+export function getCookies() {
+  const allCookies = document.cookie.replace(/=/g, `":"`).replace(/; /g, `","`)
+  return `{"${allCookies}"}`
 }
