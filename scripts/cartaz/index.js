@@ -1,4 +1,4 @@
-import { instance, getCSRF, isLogged, splitAdress } from '../utils.js';
+import { instance, isLogged, splitAddress } from '../utils.js';
 
 const form = document.querySelector('#feedback_form');
 async function createPosters(e) {
@@ -8,7 +8,7 @@ async function createPosters(e) {
     photo: await upload(e.target[0].files[0], 'Photo'),
     disappearanceParticipation: await upload(e.target[1].files[0], 'disappearance'),
     name: e.target[2].value,
-    address: splitAdress(e.target[3].value),
+    address: splitAddress(e.target[3].value),
     lastSeenAt: e.target[5].value,
     lastSeenAt: e.target[6].value,
     feedback: e.target[7].value,
